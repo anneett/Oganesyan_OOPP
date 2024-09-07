@@ -2,12 +2,13 @@
 #include <fstream>
 #include <string>
 #include "Utils.h"
+#include "Book.h"
 
 using namespace std;
 
 int main()
 {
-	//vector<Books> library;
+	vector<Book> books;
 
 	while (true) {
 		cout << "\nSelect menu item: "
@@ -21,7 +22,12 @@ int main()
 		{
 		case 1:
 		{
-			//gts.Add_pipe(pipes);
+			Add_book(books);
+			break;
+		}
+		case 2:
+		{
+			Output_books(books);
 			break;
 		}
 		case 0:

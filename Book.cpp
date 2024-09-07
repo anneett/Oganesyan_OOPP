@@ -6,20 +6,21 @@
 
 using namespace std;
 
-
 istream& operator >> (istream& in, Book& book)
 {
-	cout << "Enter book title: ";
-	cin.ignore();
-	getline(cin, book.title);
 	cout << "Enter book author: ";
-	//cin.ignore();
+	cin.ignore();
 	getline(cin, book.author);
+
+	cout << "Enter book title: ";
+	//cin.ignore();
+	getline(cin, book.title);
 
 	cout << "Enter year of book release. Если книга вышла до н.э., введите со знаком '-' : ";
 	book.rating = GetCorrectData(-868, 2024);
+
 	cout << "Enter publising house: ";
-	//cin.ignore();
+	cin.ignore();
 	getline(cin, book.publishing_house);
 
 	cout << "Есть ли книга в наличии: если есть, введите 1, если нет, то 0: ";
@@ -30,21 +31,39 @@ istream& operator >> (istream& in, Book& book)
 	return in;
 }
 
-//ostream& operator << (ostream& out, const Truba& tb)
-//{
-//	if (tb.length == 0)
-//	{
-//		cout << "\nNo pipes added." << endl;
-//	}
-//	else
-//	{
-//		cout << "Pipe MaxID: " << tb.max_idp
-//			<< "\nPipe ID: " << tb.idpipe
-//			<< "\nPipe mark: " << tb.mark
-//			<< "\nPipe length: " << tb.length
-//			<< "\nPipe diameter: " << tb.diameter
-//			<< "\nThe pipe attribute: " << tb.repair
-//			<< "\nThe free parameter: " << tb.free << endl;
-//	}
-//	return out;
-//}
+ostream& operator << (ostream& out, const Book& book)
+{
+	if (book.title == "")
+	{
+		cout << "\nNo books added." << endl;
+	}
+	else
+	{
+		cout << "Book author: " << book.title
+			<< "\nBook title: " << book.author
+			<< "\nYear of book release: " << book.release_year
+			<< "\nPublishing house of book: " << book.publishing_house
+			<< "\nBook in stock: " << book.in_stock
+			<< "\nBook rating: " << book.rating << endl;
+	}
+	return out;
+}
+
+void Add_book(vector <Book>& books)
+{
+	Book book;
+	cin >> book;
+	books.push_back(book);
+}
+
+void Output_books(vector <Book>& books)
+{
+	if (books.size() == 0)
+	{
+		cout << "You don't have books to watch." << endl;
+	}
+	else
+		cout << "\nBooks:\n" << endl;
+	for (auto& book : books)
+		cout << book << endl;
+}
