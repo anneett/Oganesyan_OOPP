@@ -1,7 +1,7 @@
-#include "Book.h"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Book.h"
 #include "Utils.h"
 
 using namespace std;
@@ -47,23 +47,4 @@ ostream& operator << (ostream& out, const Book& book)
 			<< "\nBook rating: " << book.rating << endl;
 	}
 	return out;
-}
-
-void Add_book(vector <Book>& books)
-{
-	Book book;
-	cin >> book;
-	books.push_back(book);
-}
-
-void Output_books(vector <Book>& books)
-{
-	if (books.size() == 0)
-	{
-		cout << "You don't have books to watch." << endl;
-	}
-	else
-		cout << "\nBooks:\n" << endl;
-	for (auto& book : books)
-		cout << book << endl;
 }

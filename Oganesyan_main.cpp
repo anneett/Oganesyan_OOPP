@@ -3,12 +3,14 @@
 #include <string>
 #include "Utils.h"
 #include "Book.h"
+#include "Library.h"
 
 using namespace std;
 
 int main()
 {
 	vector<Book> books;
+	Library library;
 
 	while (true) {
 		cout << "\nSelect menu item: "
@@ -22,12 +24,12 @@ int main()
 		{
 		case 1:
 		{
-			Add_book(books);
+			library.Add_book(books);
 			break;
 		}
 		case 2:
 		{
-			Output_books(books);
+			library.Output_books(books);
 			break;
 		}
 		case 0:
