@@ -13,11 +13,11 @@ istream& operator >> (istream& in, Book& book)
 	getline(cin, book.author);
 
 	cout << "Enter book title: ";
-	//cin.ignore();
+	cin.ignore();
 	getline(cin, book.title);
 
 	cout << "Enter year of book release. Если книга вышла до н.э., введите со знаком '-' : ";
-	book.rating = GetCorrectData(-868, 2024);
+	book.release_year = GetCorrectData(-868, 2024);
 
 	cout << "Enter publising house: ";
 	cin.ignore();
@@ -47,4 +47,11 @@ ostream& operator << (ostream& out, const Book& book)
 			<< "\nBook rating: " << book.rating << endl;
 	}
 	return out;
+}
+
+ofstream& operator <<(ofstream& fout, const Book& book)
+{
+	fout << "Book" << endl;
+	fout << book.author << endl << book.title << endl << book.release_year << endl << book.publishing_house << endl << book.in_stock << endl << book.rating << endl;
+	return fout;
 }

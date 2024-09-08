@@ -16,10 +16,11 @@ int main()
 		cout << "\nSelect menu item: "
 			<< "\n1. Add book;"
 			<< "\n2. View all books;"
+			<< "\n3. Save books;"
 			<< "\n0. Exit." << endl;
 		cout << "\nSelect: ";
 
-		int number = GetCorrectData(0, 2);
+		int number = GetCorrectData(0, 3);
 		switch (number)
 		{
 		case 1:
@@ -30,6 +31,11 @@ int main()
 		case 2:
 		{
 			library.Output_books(books);
+			break;
+		}
+		case 3:
+		{
+			library.Save_books(books);
 			break;
 		}
 		case 0:
