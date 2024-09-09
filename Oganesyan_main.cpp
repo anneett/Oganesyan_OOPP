@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <windows.h>
 #include "Utils.h"
 #include "Book.h"
 #include "Library.h"
@@ -13,14 +14,11 @@ int main()
 	Library library;
 
 	while (true) {
-		cout << "\nSelect menu item: "
-			<< "\n1. Add book;"
-			<< "\n2. View all books;"
-			<< "\n3. Save books;"
-			<< "\n0. Exit." << endl;
-		cout << "\nSelect: ";
-
-		int number = GetCorrectData(0, 3);
+		
+		SetConsoleOutputCP(1251);
+		SetConsoleCP(1251);
+		library.Menu();
+		int number = GetCorrectData(0, 5);
 		switch (number)
 		{
 		case 1:
@@ -36,6 +34,16 @@ int main()
 		case 3:
 		{
 			library.Save_books(books);
+			break;
+		}
+		case 4:
+		{
+			library.Download_books(books);
+			break;
+		}
+		case 5:
+		{
+			library.Clear(books);
 			break;
 		}
 		case 0:

@@ -8,25 +8,24 @@ using namespace std;
 
 istream& operator >> (istream& in, Book& book)
 {
-	cout << "Enter book author: ";
-	cin.ignore();
-	getline(cin, book.author);
-
-	cout << "Enter book title: ";
+	cout << "Введите название книги: ";
 	cin.ignore();
 	getline(cin, book.title);
 
-	cout << "Enter year of book release. Если книга вышла до н.э., введите со знаком '-' : ";
-	book.release_year = GetCorrectData(-868, 2024);
+	cout << "Введите автора книги: ";
+	getline(cin, book.author);
 
-	cout << "Enter publising house: ";
+	cout << "Введите год выпуска книги. Можно добавить книги с годом выпуска не ранее 1700: ";
+	book.release_year = GetCorrectData(1700, 2024);
+
+	cout << "Введите издательство книги: ";
 	cin.ignore();
 	getline(cin, book.publishing_house);
 
-	cout << "Есть ли книга в наличии: если есть, введите 1, если нет, то 0: ";
+	cout << "Есть ли книга в наличии: если да, введите 1, если нет, то 0: ";
 	book.in_stock = GetCorrectData(0, 1);
 
-	cout << "Enter book rating: ";
+	cout << "Введите рейтинг книги: ";
 	book.rating = GetCorrectData(0.0, 5.0);
 	return in;
 }
@@ -35,23 +34,36 @@ ostream& operator << (ostream& out, const Book& book)
 {
 	if (book.title == "")
 	{
-		cout << "\nNo books added." << endl;
+		cout << "\nНет добавленных книг." << endl;
 	}
 	else
 	{
-		cout << "Book author: " << book.title
-			<< "\nBook title: " << book.author
-			<< "\nYear of book release: " << book.release_year
-			<< "\nPublishing house of book: " << book.publishing_house
-			<< "\nBook in stock: " << book.in_stock
-			<< "\nBook rating: " << book.rating << endl;
+		cout << "Название: " << book.title
+			<< "\nАвтор: " << book.author
+			<< "\nГод выпуска: " << book.release_year
+			<< "\nИздательство: " << book.publishing_house
+			<< "\nВ наличии: " << book.in_stock
+			<< "\nРейтинг: " << book.rating << endl;
 	}
 	return out;
 }
 
-ofstream& operator <<(ofstream& fout, const Book& book)
+ifstream& operator >> (ifstream& fin, Book& book)
 {
-	fout << "Book" << endl;
-	fout << book.author << endl << book.title << endl << book.release_year << endl << book.publishing_house << endl << book.in_stock << endl << book.rating << endl;
+	getline(fin, book.title);
+	getline(fin, book.author);
+	fin >> book.release_year;
+	fin.ignore();
+	getline(fin, book.publishing_house);
+	fin >> book.in_stock;
+	fin >> book.rating;
+	fin.ignore();
+	return fin;
+}
+
+ofstream& operator << (ofstream& fout, const Book& book)
+{
+	fout << "Книга" << endl;
+	fout << book.title << endl << book.author << endl << book.release_year << endl << book.publishing_house << endl << book.in_stock << endl << book.rating << endl;
 	return fout;
 }
