@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <windows.h>
-#include "Utils.h"
+//#include "Utils.h"
 #include "Book.h"
 #include "Library.h"
 
@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	vector<Book> books;
+	vector<Book*> books;
 	Library library;
 
 	while (true) {

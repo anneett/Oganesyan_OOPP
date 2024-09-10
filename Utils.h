@@ -11,8 +11,7 @@ T GetCorrectData(T min, T max)
 	{
 		cin.clear();
 		cin.ignore(100000, '\n');
-		cout << "\nEnter the correct data! Type number (" << min << " - " << max << "):";
-		cout << "\nEnter: ";
+		cout << "\n¬ведите корректные данные! ¬ведите число от " << min << " до " << max << ": ";
 	}
 	return x;
 }
