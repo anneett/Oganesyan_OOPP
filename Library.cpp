@@ -5,26 +5,14 @@
 
 using namespace std;
 
-void Library::Menu()
-{
-    cout << "\n         МЕНЮ"
-        << "\n1. Добавить книгу;"
-        << "\n2. Просмотреть все книги;"
-        << "\n3. Записать данные в файл;"
-        << "\n4. Загрузить данные из файла;"
-        << "\n5. Очистить список;"
-        << "\n0. Выход." << endl;
-    cout << "\nВыберите пункт меню: ";
-}
-
-void Library::Add_book(vector<Book*>& books)
+void Library::Add_book()
 {
     Book* book = new Book;
     cin >> *book;
     books.push_back(book);
 }
 
-void Library::Output_books(const vector<Book*>& books)
+void Library::Output_books()
 {
     if (books.empty())
     {
@@ -40,7 +28,7 @@ void Library::Output_books(const vector<Book*>& books)
     }
 }
 
-void Library::Save_books(const vector<Book*>& books)
+void Library::Save_books()
 {
     ofstream fout;
     string filename;
@@ -51,7 +39,8 @@ void Library::Save_books(const vector<Book*>& books)
     else
     {
         cout << "Введите название файла: ";
-        cin >> filename;
+        cin.ignore();
+        getline(cin, filename);
 
         fout.open((filename + ".txt"), ios::trunc);
         if (fout.is_open())
@@ -70,15 +59,17 @@ void Library::Save_books(const vector<Book*>& books)
     }
 }
 
-void Library::Download_books(vector<Book*>& books)
+void Library::Download_books()
 {
     ifstream fin;
     string filename;
     cout << "Введите имя файла: ";
-    cin >> filename;
+    cin.ignore();
+    getline(cin, filename);
     fin.open((filename + ".txt"));
     if (fin.is_open())
     {
+        Clear();
         string line;
         bool p = false;
         while (getline(fin, line))
@@ -86,8 +77,15 @@ void Library::Download_books(vector<Book*>& books)
             if (line == "Книга")
             {
                 Book* book = new Book;
-                fin >> *book;
                 books.push_back(book);
+                fin >> *book;
+                if (!fin)
+                {
+                    cout << "Неверный формат файла." << endl;
+                    Clear();
+                    fin.close();
+                    return;
+                }
                 p = true;
             }
         }
@@ -107,7 +105,7 @@ void Library::Download_books(vector<Book*>& books)
     fin.close();
 }
 
-void Library::Clear(vector<Book*>& books)
+void Library::Clear()
 {
     for (auto& book : books)
     {

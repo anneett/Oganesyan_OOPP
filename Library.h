@@ -4,13 +4,16 @@
 
 class Library
 {
-public:
+	vector<Book*> books;
 
-	void Menu();
-	void Add_book(vector<Book*>& books);
-	void Output_books(const vector<Book*>& books);
-	void Save_books(const vector<Book*>& books);
-	void Download_books(vector<Book*>& books);
-	void Clear(vector<Book*>& books);
+public:
+	~Library() {
+		Clear();
+	}
+	void Add_book();
+	void Output_books();
+	void Save_books();
+	void Download_books();
+	void Clear();
 
 };
