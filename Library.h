@@ -1,6 +1,7 @@
 #pragma once
 #include "Book.h"
 #include "Utils.h"
+#include <vector>
 
 class Library
 {

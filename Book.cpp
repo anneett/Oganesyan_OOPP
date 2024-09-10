@@ -11,6 +11,17 @@ istream& operator >> (istream& in, Book& book)
 	cout << "¬ведите название книги: ";
 	cin.ignore();
 	getline(cin, book.title);
+	while (true)
+	{
+		if (book.title == "")
+		{
+			cout << " нига не может не иметь название. ¬ведите название книги: ";
+			cin.ignore();
+			getline(cin, book.title);
+		}
+		else
+			break;
+	}
 
 	cout << "¬ведите автора книги: ";
 	getline(cin, book.author);
