@@ -1,14 +1,15 @@
 #pragma once
+#include "Boost.h"
 #include "Book.h"
 #include "Utils.h"
-#include <vector>
 
 class Library
 {
 	vector<Book*> books;
 
 public:
-	~Library() {
+
+	virtual ~Library() {
 		Clear();
 	}
 	void Add_book();
@@ -16,5 +17,4 @@ public:
 	void Save_books();
 	void Download_books();
 	void Clear();
-
 };

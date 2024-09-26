@@ -1,12 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <windows.h>
+#include "Boost.h"
 #include "Utils.h"
 #include "Book.h"
 #include "Library.h"
-
-using namespace std;
 
 int main()
 {

@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
-
-using namespace std;
+#include "Boost.h"
 
 template <typename T>
 T GetCorrectData(T min, T max)

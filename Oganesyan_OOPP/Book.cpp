@@ -1,10 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "Book.h"
 #include "Utils.h"
-
-using namespace std;
 
 istream& operator >> (istream& in, Book& book)
 {

@@ -1,9 +1,5 @@
-#include <iostream>
-#include <fstream>
 #include "Utils.h"
 #include "Library.h"
-
-using namespace std;
 
 void Library::Add_book()
 {
