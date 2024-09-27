@@ -1,19 +1,21 @@
 #pragma once
 #include "Boost.h"
-#include "Book.h"
 #include "Utils.h"
+#include "Book.h"
+#include "EBook.h"
 
 class Library
 {
-	vector<Book*> books;
+	vector<shared_ptr<Book>> books;
 
 public:
 
 	virtual ~Library() {
 		Clear();
 	}
-	void Add_book();
-	void Output_books();
+	virtual void Add_book();
+	virtual void Add_EBook();
+	virtual void Output_books();
 	void Save_books();
 	void Download_books();
 	void Clear();

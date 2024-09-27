@@ -1,6 +1,5 @@
 #include "Boost.h"
 #include "Utils.h"
-#include "Book.h"
 #include "Library.h"
 
 int main()
@@ -14,14 +13,15 @@ int main()
 		
 		cout << "\n         МЕНЮ"
 			<< "\n1. Добавить книгу;"
-			<< "\n2. Просмотреть все книги;"
-			<< "\n3. Записать данные в файл;"
-			<< "\n4. Загрузить данные из файла;"
-			<< "\n5. Очистить список;"
+			<< "\n2. Добавить электронную книгу;"
+			<< "\n3. Просмотреть все книги;"
+			<< "\n4. Записать данные в файл;"
+			<< "\n5. Загрузить данные из файла;"
+			<< "\n6. Очистить список;"
 			<< "\n0. Выход." << endl;
 		cout << "\nВыберите пункт меню: ";
 
-		int number = GetCorrectData(0, 5);
+		int number = GetCorrectData(0, 6);
 		switch (number)
 		{
 		case 1:
@@ -31,20 +31,25 @@ int main()
 		}
 		case 2:
 		{
-			library.Output_books();
+			library.Add_EBook();
 			break;
 		}
 		case 3:
 		{
-			library.Save_books();
+			library.Output_books();
 			break;
 		}
 		case 4:
 		{
-			library.Download_books();
+			library.Save_books();
 			break;
 		}
 		case 5:
+		{
+			library.Download_books();
+			break;
+		}
+		case 6:
 		{
 			library.Clear();
 			break;

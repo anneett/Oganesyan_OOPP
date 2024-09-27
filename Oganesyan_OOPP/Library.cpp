@@ -1,11 +1,20 @@
 #include "Utils.h"
 #include "Library.h"
+#include "EBook.h"
+#include <memory>
 
 void Library::Add_book()
 {
-    Book* book = new Book;
-    cin >> *book;
-    books.push_back(book);
+    shared_ptr<Book> book = make_shared<Book>();
+    book->Input(cin);
+    books.push_back(book); 
+}
+
+void Library::Add_EBook()
+{
+    shared_ptr<EBook> e_book = make_shared<EBook>();
+    e_book->Input(cin);
+    books.push_back(e_book);
 }
 
 void Library::Output_books()
@@ -16,10 +25,10 @@ void Library::Output_books()
     }
     else
     {
-        cout << "\nКниги:\n" << endl;
+        cout << "\nКниги:" << endl;
         for (const auto& book : books)
         {
-            cout << *book << endl;
+            book->Output(cout << endl);
         }
     }
 }
@@ -56,7 +65,7 @@ void Library::Save_books()
 }
 
 void Library::Download_books()
-{
+{/*
     ifstream fin;
     string filename;
     cout << "Введите имя файла: ";
@@ -98,15 +107,11 @@ void Library::Download_books()
     {
         cout << "Не удалось открыть файл с названием " + filename + " или он не существует." << endl;
     }
-    fin.close();
+    fin.close();*/
 }
 
 void Library::Clear()
 {
-    for (auto& book : books)
-    {
-        delete book;
-    }
     books.clear();
     cout << "Данные о книгах очищены." << endl;
 }
