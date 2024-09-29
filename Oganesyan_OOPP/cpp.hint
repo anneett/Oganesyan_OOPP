@@ -1,0 +1,4 @@
+// Файлы указаний помогают среде IDE Visual Studio интерпретировать идентификаторы Visual C++
+// (например, имена функций и макросов).
+// Дополнительные сведения: https://go.microsoft.com/fwlink/?linkid=865984
+#define BOOST_SERIALIZATION_SPLIT_MEMBER() template<class Archive> void serialize( Archive &ar, const unsigned int file_version ){ boost::serialization::split_member(ar, *this, file_version); }

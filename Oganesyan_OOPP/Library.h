@@ -10,13 +10,19 @@ class Library
 
 public:
 
-	virtual ~Library() {
-		Clear();
-	}
 	virtual void Add_book();
 	virtual void Add_EBook();
 	virtual void Output_books();
-	void Save_books();
-	void Download_books();
+
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version)
+	{
+		ar& books;
+	}
+
+	virtual void Save_books(const std::string& filename);
+	virtual void Load_books(const std::string& filename);
+
 	void Clear();
+
 };

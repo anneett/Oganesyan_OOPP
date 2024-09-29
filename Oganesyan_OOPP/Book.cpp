@@ -1,75 +1,77 @@
-#include "Book.h"
 #include "Utils.h"
+#include "Book.h"
 
-istream& operator >> (istream& in, Book& book)
+void Book::Output(ostream& out) const
 {
-	cout << "Введите название книги: ";
-	cin.ignore();
-	getline(cin, book.title);
-	while (true)
+	if (title == "")
 	{
-		if (book.title == "")
-		{
-			cout << "Книга не может не иметь название. Введите название книги: ";
-			cin.ignore();
-			getline(cin, book.title);
-		}
-		else
-			break;
-	}
-
-	cout << "Введите автора книги: ";
-	getline(cin, book.author);
-
-	cout << "Введите год выпуска книги. Можно добавить книги с годом выпуска не ранее 1700: ";
-	book.release_year = GetCorrectData(1700, 2024);
-
-	cout << "Введите издательство книги: ";
-	cin.ignore();
-	getline(cin, book.publishing_house);
-
-	cout << "Есть ли книга в наличии: если да, введите 1, если нет, то 0: ";
-	book.in_stock = GetCorrectData(0, 1);
-
-	cout << "Введите рейтинг книги: ";
-	book.rating = GetCorrectData(0.0, 5.0);
-	return in;
-}
-
-ostream& operator << (ostream& out, const Book& book)
-{
-	if (book.title == "")
-	{
-		cout << "\nНет добавленных книг." << endl;
+		out << "\nНет добавленных книг." << endl;
 	}
 	else
 	{
-		cout << "Название: " << book.title
-			<< "\nАвтор: " << book.author
-			<< "\nГод выпуска: " << book.release_year
-			<< "\nИздательство: " << book.publishing_house
-			<< "\nВ наличии: " << book.in_stock
-			<< "\nРейтинг: " << book.rating << endl;
+		out << "Название: " << title
+			<< "\nАвтор: " << author
+			<< "\nГод выпуска: " << release_year
+			<< "\nИздательство: " << publishing_house
+			<< "\nВ наличии: " << in_stock
+			<< "\nРейтинг: " << rating << endl;
 	}
-	return out;
 }
 
-ifstream& operator >> (ifstream& fin, Book& book)
+
+void Book::Input(istream& in)
 {
-	getline(fin, book.title);
-	getline(fin, book.author);
-	fin >> book.release_year;
-	fin.ignore();
-	getline(fin, book.publishing_house);
-	fin >> book.in_stock;
-	fin >> book.rating;
-	fin.ignore();
-	return fin;
+	cout << "Введите название книги: ";
+	in.ignore();
+	getline(in, title);
+
+	while (title.empty())
+	{
+		cout << "Книга не может не иметь название. Введите название книги: ";
+		getline(in, title);
+	}
+
+	cout << "Введите автора книги: ";
+	getline(in, author);
+
+	cout << "Введите год выпуска книги. Можно добавить книги с годом выпуска не ранее 1700: ";
+	release_year = GetCorrectData(1700, 2024);
+
+	cout << "Введите издательство книги: ";
+	in.ignore();
+	getline(in, publishing_house);
+
+	while (publishing_house.empty())
+	{
+		cout << "Книга не может не издательства. Введите издательство книги: ";
+		getline(in, publishing_house);
+	}
+
+	cout << "Есть ли книга в наличии: если да, введите 1, если нет, то 0: ";
+	in_stock = GetCorrectData(0, 1);
+
+	cout << "Введите рейтинг книги (от 0.0 до 5.0): ";
+	rating = GetCorrectData(0.0, 5.0);
 }
 
-ofstream& operator << (ofstream& fout, const Book& book)
-{
-	fout << "Книга" << endl;
-	fout << book.title << endl << book.author << endl << book.release_year << endl << book.publishing_house << endl << book.in_stock << endl << book.rating << endl;
-	return fout;
-}
+BOOST_CLASS_EXPORT(Book)
+
+//ifstream& operator >> (ifstream& fin, Book& book)
+//{
+//	getline(fin, book.title);
+//	getline(fin, book.author);
+//	fin >> book.release_year;
+//	fin.ignore();
+//	getline(fin, book.publishing_house);
+//	fin >> book.in_stock;
+//	fin >> book.rating;
+//	fin.ignore();
+//	return fin;
+//}
+
+//ofstream& operator << (ofstream& fout, const Book& book)
+//{
+//	fout << "Книга" << endl;
+//	fout << book.title << endl << book.author << endl << book.release_year << endl << book.publishing_house << endl << book.in_stock << endl << book.rating << endl;
+//	return fout;
+//}

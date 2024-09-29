@@ -1,7 +1,6 @@
 #include "Utils.h"
 #include "Library.h"
 #include "EBook.h"
-#include <memory>
 
 void Library::Add_book()
 {
@@ -33,81 +32,16 @@ void Library::Output_books()
     }
 }
 
-void Library::Save_books()
-{
-    ofstream fout;
-    string filename;
-    if (books.empty())
-    {
-        cout << "У вас нет данных для записи в файл." << endl;
-    }
-    else
-    {
-        cout << "Введите название файла: ";
-        cin.ignore();
-        getline(cin, filename);
-
-        fout.open((filename + ".txt"), ios::trunc);
-        if (fout.is_open())
-        {
-            for (const auto& book : books)
-            {
-                fout << *book << endl;
-            }
-            cout << "Данные о книгах записаны в файл с именем " + filename + "." << endl;
-        }
-        else
-        {
-            cout << "Не удалось открыть файл " + filename + ".txt." << endl;
-        }
-        fout.close();
-    }
+void Library::Save_books(const std::string& filename) {
+    std::ofstream ofs(filename);
+    boost::archive::text_oarchive oa(ofs);
+    oa << books; // Сериализация вектора указателей на базовые и производные классы
 }
 
-void Library::Download_books()
-{/*
-    ifstream fin;
-    string filename;
-    cout << "Введите имя файла: ";
-    cin.ignore();
-    getline(cin, filename);
-    fin.open((filename + ".txt"));
-    if (fin.is_open())
-    {
-        Clear();
-        string line;
-        bool p = false;
-        while (getline(fin, line))
-        {
-            if (line == "Книга")
-            {
-                Book* book = new Book;
-                books.push_back(book);
-                fin >> *book;
-                if (!fin)
-                {
-                    cout << "Неверный формат файла." << endl;
-                    Clear();
-                    fin.close();
-                    return;
-                }
-                p = true;
-            }
-        }
-        if (!p)
-        {
-            cout << "Нет данных о книгах." << endl;
-        }
-        else
-        {
-            cout << "Данные о книгах загружены из файла." << endl;
-        }
-    }
-    else
-    {
-        cout << "Не удалось открыть файл с названием " + filename + " или он не существует." << endl;
-    }
-    fin.close();*/
+void Library::Load_books(const std::string& filename) {
+    std::ifstream ifs(filename);
+    boost::archive::text_iarchive ia(ifs);
+    ia >> books; // Десериализация вектора указателей
 }
 
 void Library::Clear()

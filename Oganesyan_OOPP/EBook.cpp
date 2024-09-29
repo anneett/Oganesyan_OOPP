@@ -21,6 +21,8 @@ void EBook::Output(ostream& out) const
     out << "—сылка на книгу: " << link << endl;
 }
 
+BOOST_CLASS_EXPORT(EBook)
+
 //ifstream& operator >> (ifstream& fin, Book& book)
 //{
 //	getline(fin, book.title);
