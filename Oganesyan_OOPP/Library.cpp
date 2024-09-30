@@ -72,11 +72,13 @@ void Library::Load_books()
     fin.open((filename + ".dat"));
     if (fin.is_open())
     {
-        boost::archive::binary_iarchive ia(fin);
-        ia >> books;
-        if (!fin)
-        {
-            cout << "Произошла ошибка чтения. Данные не загружены." << endl;
+        try {
+            boost::archive::binary_iarchive ia(fin);
+            ia >> books;
+            cout << "Данные успешно загружены." << endl;
+        }
+        catch (const exception& e) {
+            cout << "Ошибка чтения из файла: " << e.what() << "." << endl;
             Clear();
             fin.close();
             return;
