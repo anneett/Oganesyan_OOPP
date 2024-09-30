@@ -32,16 +32,61 @@ void Library::Output_books()
     }
 }
 
-void Library::Save_books(const std::string& filename) {
-    std::ofstream ofs(filename);
-    boost::archive::text_oarchive oa(ofs);
-    oa << books; // Сериализация вектора указателей на базовые и производные классы
+void Library::Save_books()
+{
+    string filename;
+    ofstream fout(filename, ofstream::binary);
+    if (books.empty())
+    {
+        cout << "У вас нет данных для записи в файл." << endl;
+    }
+    else
+    {
+        cout << "Введите название файла: ";
+        cin.ignore();
+        getline(cin, filename);
+        fout.open((filename + ".dat"));
+        if (fout.is_open())
+        {
+            boost::archive::binary_oarchive oa(fout);
+            oa << books;
+            cout << "Данные загружеы в файл с названием " + filename + ".dat." << endl;
+            fout.close();
+        }
+        else
+        {
+            cout << "Не удалось открыть файл " + filename + ".dat." << endl;
+        }
+        fout.close();
+    }
 }
 
-void Library::Load_books(const std::string& filename) {
-    std::ifstream ifs(filename);
-    boost::archive::text_iarchive ia(ifs);
-    ia >> books; // Десериализация вектора указателей
+void Library::Load_books()
+{
+    string filename;
+    ifstream fin(filename, ifstream::binary);
+    
+    cout << "Введите название файла для загрузки: ";
+    cin.ignore();
+    getline(cin, filename);
+    fin.open((filename + ".dat"));
+    if (fin.is_open())
+    {
+        boost::archive::binary_iarchive ia(fin);
+        ia >> books;
+        if (!fin)
+        {
+            cout << "Произошла ошибка чтения. Данные не загружены." << endl;
+            Clear();
+            fin.close();
+            return;
+        }
+    }
+    else
+    {
+        cout << "Не удалось открыть файл с названием " + filename + ".dat." << endl;
+    }
+    fin.close();
 }
 
 void Library::Clear()

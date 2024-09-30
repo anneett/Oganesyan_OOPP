@@ -20,9 +20,8 @@ public:
 		ar& books;
 	}
 
-	virtual void Save_books(const std::string& filename);
-	virtual void Load_books(const std::string& filename);
+	virtual void Save_books();
+	virtual void Load_books();
 
 	void Clear();
-
 };

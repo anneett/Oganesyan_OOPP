@@ -41,12 +41,12 @@ int main()
 		}
 		case 4:
 		{
-			library.Save_books("books.dat");
+			library.Save_books();
 			break;
 		}
 		case 5:
 		{
-			library.Load_books("books.dat");
+			library.Load_books();
 			break;
 		}
 		case 6:

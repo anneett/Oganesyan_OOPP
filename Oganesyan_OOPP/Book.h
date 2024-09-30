@@ -31,10 +31,5 @@ public:
 
 	virtual void Input(istream& in);
 	virtual void Output(ostream& out) const;
-
-	//friend istream& operator >> (istream& in, Book& book);
-	////friend ostream& operator << (ostream& out, const Book& book);
-	//friend ofstream& operator << (ofstream& fout, const Book& book);
-	//friend ifstream& operator >> (ifstream& fin, Book& book);
 };
 

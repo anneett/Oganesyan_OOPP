@@ -32,11 +32,6 @@ public:
 		ar & boost::serialization::base_object<Book>(*this);
 		ar & link;
 	}
-
-	//friend istream& operator >> (istream& in, EBook& e_book);
-	//friend ostream& operator << (ostream& out, const EBook& e_book);
-	//friend ofstream& operator << (ofstream& fout, const EBook& book);
-	//friend ifstream& operator >> (ifstream& fin, EBook& book);
 };
 
 BOOST_CLASS_VERSION(EBook, 1)
