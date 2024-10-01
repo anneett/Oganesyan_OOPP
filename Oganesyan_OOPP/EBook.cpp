@@ -1,6 +1,8 @@
 #include "Utils.h"
 #include "EBook.h"
 
+BOOST_CLASS_EXPORT(EBook)
+
 void EBook::Input(istream& in)
 {
     Book::Input(in);
@@ -20,5 +22,3 @@ void EBook::Output(ostream& out) const
     Book::Output(out);
     out << "—сылка на книгу: " << link << endl;
 }
-
-BOOST_CLASS_EXPORT(EBook)

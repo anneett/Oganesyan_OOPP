@@ -10,9 +10,9 @@ class Library
 
 public:
 
-	virtual void Add_book();
-	virtual void Add_EBook();
-	virtual void Output_books();
+	void Add_book();
+	void Add_EBook();
+	void Output_books();
 
 	template<class Archive>
 	void serialize(Archive& ar, const unsigned int version)
@@ -20,8 +20,8 @@ public:
 		ar& books;
 	}
 
-	virtual void Save_books();
-	virtual void Load_books();
+	void Save_books();
+	void Load_books();
 
 	void Clear();
 };
