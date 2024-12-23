@@ -35,7 +35,7 @@ void Library::Output_books()
 void Library::Save_books()
 {
     string filename;
-    ofstream fout(filename, ofstream::binary);
+    ofstream fout(filename);
     if (books.empty())
     {
         cout << "У вас нет данных для записи в файл." << endl;
@@ -45,17 +45,17 @@ void Library::Save_books()
         cout << "Введите название файла: ";
         cin.ignore();
         getline(cin, filename);
-        fout.open((filename + ".dat"));
+        fout.open((filename + ".txt"));
         if (fout.is_open())
         {
-            boost::archive::binary_oarchive oa(fout);
+            boost::archive::text_oarchive oa(fout);
             oa << books;
-            cout << "Данные загружеы в файл с названием " + filename + ".dat." << endl;
+            cout << "Данные загружеы в файл с названием " + filename + ".txt." << endl;
             fout.close();
         }
         else
         {
-            cout << "Не удалось открыть файл " + filename + ".dat." << endl;
+            cout << "Не удалось открыть файл " + filename + ".txt." << endl;
         }
         fout.close();
     }
@@ -64,16 +64,16 @@ void Library::Save_books()
 void Library::Load_books()
 {
     string filename;
-    ifstream fin(filename, ifstream::binary);
+    ifstream fin(filename);
     
     cout << "Введите название файла для загрузки: ";
     cin.ignore();
     getline(cin, filename);
-    fin.open((filename + ".dat"));
+    fin.open((filename + ".txt"));
     if (fin.is_open())
     {
         try {
-            boost::archive::binary_iarchive ia(fin);
+            boost::archive::text_iarchive ia(fin);
             ia >> books;
             cout << "Данные успешно загружены." << endl;
         }
@@ -86,7 +86,7 @@ void Library::Load_books()
     }
     else
     {
-        cout << "Не удалось открыть файл с названием " + filename + ".dat." << endl;
+        cout << "Не удалось открыть файл с названием " + filename + ".txt." << endl;
     }
     fin.close();
 }
